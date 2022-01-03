@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/FionaBlackler/hft-project-TicTacToe/issues"
   },
-  "homepage": "https://github.com/FionaBlackler/hft-project-TicTacToe#readme"
+  "homepage": "https://github.com/FionaBlackler/hft-project-TicTacToe#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  }
 }
