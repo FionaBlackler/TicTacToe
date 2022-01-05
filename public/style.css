@@ -7,15 +7,48 @@ h1 {
     text-align: center;
 }
 
-.reset {
-    background-color: #c4c4c4;
-    color: #000000;
-    border: none;
-    padding: 10px;
-    text-align: center;
-    font-size: 16px;
+:root {
+	--cell-size: 100px;
+
+	--color: #000000; /* for hover */
+	--color-set: #000000; /* when set */
+	--l: 10px; /* X line-width */
 }
 
-.reset:hover{
-    background-color: #747272;
+
+.board {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(3, auto)
+}
+.cell {
+	width: var(--cell-size);
+	height: var(--cell-size);
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
+	border-top: none;
+}
+
+.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
+	border-left: none;
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+	border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+	border-bottom: none;
 }
