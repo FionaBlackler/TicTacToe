@@ -1,24 +1,33 @@
-h1 {
-    color: #030303;
-    font-style: arial;
-    font-weight: bolder;
-    font-size: large;
+.wrapper{
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center; 
+}
+.wrapper > * {
+    padding: 30px;
+    flex: 1 100%;
+}
+.title {
+    color: #000000;
     font-family: Arial, Helvetica, sans-serif;
+    font-style: arial;
+    font-weight: bolder;    
     text-align: center;
 }
-
-:root {
-	--cell-size: 100px;
-
-	--color: #000000; /* for hover */
-	--color-set: #000000; /* when set */
-	--l: 10px; /* X line-width */
+.instructions{
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: arial;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
 }
-
-
+body{
+    background-image: url("public\brickwall.jpg"); 
+    background-repeat: no-repeat,
+}
 .board {
-	width: 100vw;
-	height: 100vh;
 	display: grid;
 	justify-content: center;
 	align-content: center;
@@ -27,9 +36,9 @@ h1 {
 	grid-template-columns: repeat(3, auto)
 }
 .cell {
-	width: var(--cell-size);
-	height: var(--cell-size);
-	border: 1px solid black;
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -52,3 +61,35 @@ h1 {
 .cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
 	border-bottom: none;
 }
+.button{
+    text-align: center;
+}
+.restartButton {
+	border-radius: 10px;
+	font-size: 25px;
+	background-color: rgb(163, 163, 163);
+	border: 1px solid;
+	padding: .25em .5em;
+	cursor: pointer;
+    position:relative;
+}
+.restartButton:hover {
+	background-color:rgb(83, 83, 83);
+	color: white;
+	border-color: white;
+}
+.footer{
+    text-align: center;
+
+}
+@media all and (min-width: 600px) {
+    .aside { flex: 1 0 0; }
+  }
+  
+@media all and (min-width: 800px) {
+    .board    { flex: 3 20px; }
+    .instructions { order: 1; } 
+    .board    { order: 2; }
+    .button { order: 3; }
+    .footer  { order: 4; }
+ }
