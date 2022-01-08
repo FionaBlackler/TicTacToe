@@ -2,13 +2,13 @@
 	font-family: neon;
 	src: url(neon.ttf);
 }
+
 :root{
 	--clr-neon:#ffff;
     --clr-neon-hue:hsl(317 200% 54%);
 	--clr-bg:hsl(323 21% 16%);
     --clr-player-x: hsl(317 200% 54%);
     --clr-player-o: hsl(38 100% 54%);
-
 }
 
 body{   
@@ -16,11 +16,12 @@ body{
     padding:0;
     height: 100%;
 	width: 100%;
+    min-width: 1000px;
     font-family: sans-serif;
     background-image: url("rough_black_metal_wall.jpg") !important;
-    background-position: center ;
-    background-repeat: no-repeat ;
-    background-size: cover ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 *{
@@ -29,7 +30,7 @@ body{
 
 .title{
 	font-family: neon;
-    color:	var(--clr-neon);
+    color: var(--clr-neon);
 	text-shadow:
 	0 0 7px var(--clr-neon),
 	0 0 10px var(--clr-neon),
@@ -40,12 +41,13 @@ body{
 	0 0 102px var(--clr-neon-hue),
 	0 0 151px var(--clr-neon-hue);
 	text-align: center;
-	padding-top: 40px;
-	padding-left:80px;
+	padding-top: 2.5%;
+	padding-left:5%;
 	text-transform: uppercase;
 	font-size: 5rem;
 	animation: flicker 1.5s infinite alternate; 
 }
+
 @keyframes flicker {
     
 	0%, 18%, 22%, 25%, 53%, 57%, 100% {
@@ -67,29 +69,27 @@ body{
 	}    
   }
 
-
 .container{
     height: 80vh;  
 	width: 100%;
+    min-width: 1000px;
     display: flex;
-    align-items:center;
-    justify-content:space-between;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: row;
 }
 
 .instructions{
     text-align: center;
-	color:var(--clr-neon-hue);
+	color: var(--clr-neon-hue);
     border: var(--clr-neon-hue) 0.125em solid;
     padding: 0.25em 1em;
     border-radius: 0.25em;
 	box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);
 	text-shadow:
-    0 0 2em   rgba(0, 0, 0, 0),
-	0 0 1em var(--clr-neon),
-   
+    0 0 2em rgba(0, 0, 0, 0),
+	0 0 1em var(--clr-neon-hue);   
 }
-
 
 .board{
     width: 450px;
@@ -147,6 +147,4 @@ body{
     text-shadow: none;
 	box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
 	background-color:var(--clr-neon-hue);
-	transform: translateY(-0.25em);
-
 }
