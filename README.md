@@ -2,6 +2,6 @@
 IPR TicTacToe Projekt 2021
 
 @Felix 
-Links für github TicTacToe games
-https://github.com/nurj20/tic-tac-toe-with-websockets.git
-https://github.com/javascriptacademy-stash/tic-tac-toe.git
+Links für github TicTacToe
+- https://github.com/nurj20/tic-tac-toe-with-websockets.git
+- https://github.com/javascriptacademy-stash/tic-tac-toe.git
