@@ -50,8 +50,7 @@ body{
 
 @keyframes flicker {
     
-	0%, 18%, 22%, 25%, 53%, 57%, 100% {
-  
+	0%, 18%, 22%, 25%, 53%, 57%, 100% {  
 		text-shadow:
 		0 0 4px var(--clr-neon),
 		0 0 11px var(--clr-neon),
@@ -60,8 +59,7 @@ body{
 		0 0 80px var(--clr-neon-hue),
 		0 0 90px var(--clr-neon-hue),
 		0 0 100px var(--clr-neon-hue),
-		0 0 150px var(--clr-neon-hue);
-	
+		0 0 150px var(--clr-neon-hue);	
 	}
 	
 	20%, 24%, 55% {        
