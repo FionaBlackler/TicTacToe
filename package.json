@@ -1,0 +1,29 @@
+{
+  "name": "hft-project-tictactoe",
+  "version": "1.0.0",
+  "description": "TicTacToe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FionaBlackler/hft-project-TicTacToe.git"
+  },
+  "keywords": [
+    "Game",
+    "TicTacToe",
+    "Socket.io",
+    "Websocket"
+  ],
+  "author": "Tobias Fiona Felix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FionaBlackler/hft-project-TicTacToe/issues"
+  },
+  "homepage": "https://github.com/FionaBlackler/hft-project-TicTacToe#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
+}
