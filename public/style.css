@@ -82,7 +82,6 @@ body{
     font-style: sans-serif;
     font-size: large;
     display: inline-block;
-    cursor: pointer;
     text-decoration: none;
     color: var(--clr-neon-hue);
     background-color: transparent;
