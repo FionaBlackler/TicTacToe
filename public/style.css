@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body { 
     margin: 0;
     padding-bottom: 3rem;
@@ -40,3 +41,195 @@ body {
 #messages > li:nth-child(odd) { 
     background: #efefef; 
 }
+=======
+@font-face {
+	font-family: neon;
+	src: url(neon.ttf);
+}
+
+:root{
+	--clr-neon:#ffff;
+    --clr-neon-hue:hsl(317 200% 54%);
+    --clr-player-x: hsl(154 100% 54%);
+    --clr-player-o: hsl(38 100% 54%);
+}
+
+body{   
+    margin:0;
+    padding:0;
+    height: 100%;
+	width: 100%;
+    min-width: 1000px;
+    font-family: sans-serif;
+    background-image: url("rough_black_metal_wall.jpg") !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+*{
+    box-sizing: border-box; 
+}
+
+.title{
+	font-family: neon;
+    color: var(--clr-neon);
+	text-shadow:
+	0 0 7px var(--clr-neon),
+	0 0 10px var(--clr-neon),
+	0 0 21px var(--clr-neon),
+	0 0 42px var(--clr-neon-hue),
+	0 0 82px var(--clr-neon-hue),
+	0 0 92px var(--clr-neon-hue),
+	0 0 102px var(--clr-neon-hue),
+	0 0 151px var(--clr-neon-hue);
+	text-align: center;
+	padding-top: 2.5%;
+	padding-left:6.5%;
+	text-transform: uppercase;
+	font-size: 5rem;
+	animation: flicker 1.5s infinite alternate; 
+}
+
+@keyframes flicker {
+    
+	0%, 18%, 22%, 25%, 53%, 57%, 100% {  
+		text-shadow:
+		0 0 4px var(--clr-neon),
+		0 0 11px var(--clr-neon),
+		0 0 19px var(--clr-neon),
+		0 0 40px var(--clr-neon-hue),
+		0 0 80px var(--clr-neon-hue),
+		0 0 90px var(--clr-neon-hue),
+		0 0 100px var(--clr-neon-hue),
+		0 0 150px var(--clr-neon-hue);	
+	}
+	
+	20%, 24%, 55% {        
+		text-shadow: none;
+	}    
+}
+
+.container{
+    height: 80vh;  
+	width: 100%;
+    min-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.instructions{
+    margin-top: 2%;
+    text-align: center;
+    font-style: sans-serif;
+    font-size: large;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon-hue);
+    background-color: transparent;
+    border: var(--clr-neon-hue) 0.125em solid;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+    text-shadow:
+    0 0 0.5em   hsl(0 0% 100% / 0.3),
+    0 0 1em var(--clr-neon-hue);
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);
+}
+
+.playerX {
+    color: var(--clr-player-x);
+    text-shadow:
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-x); 
+}
+
+.playerO {
+    color: var(--clr-player-o);
+    text-shadow: 
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-o); 
+}
+
+.board{
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell{
+    width: 150px;
+    height: 150px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;    
+    font-size: 5rem;
+}
+
+#a1,#a3{
+    color: var(--clr-player-x);
+    text-shadow: 
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-x);
+}
+
+#a2{
+    color: var(--clr-player-o);
+    text-shadow: 
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-o); 
+}
+
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
+    border-left: none;
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+    border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+    border-bottom: none;
+}
+
+.restart {
+	font-style: sans-serif;
+    font-size: 2rem;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon-hue);
+    background-color: transparent;
+    border: var(--clr-neon-hue) 0.125em solid;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+    text-shadow:
+    0 0 0.5em   hsl(0 0% 100% / 0.3),
+    0 0 0.75em var(--clr-neon-hue);
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);    
+}
+
+.restart:hover {
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
+    text-shadow: none;
+	box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
+	background-color:var(--clr-neon-hue);
+}
+
+.footer{
+    text-align: center;
+	color: var(--clr-neon);
+    padding-top: 5%;
+    padding-left:8%;
+    opacity: 0.5;
+}
+>>>>>>> Design
