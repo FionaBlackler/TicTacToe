@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+/* Websocket Branch */
+
 body { 
     margin: 0;
     padding-bottom: 3rem;
@@ -41,7 +42,9 @@ body {
 #messages > li:nth-child(odd) { 
     background: #efefef; 
 }
-=======
+
+/* Design Branch */
+
 @font-face {
 	font-family: neon;
 	src: url(neon.ttf);
@@ -232,4 +235,3 @@ body{
     padding-left:8%;
     opacity: 0.5;
 }
->>>>>>> Design
