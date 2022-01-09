@@ -40,7 +40,3 @@ body {
 #messages > li:nth-child(odd) { 
     background: #efefef; 
 }
-
-h1 {
-    color: rgb(218, 20, 201);
-}
