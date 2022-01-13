@@ -18,7 +18,7 @@ body{
 	width: 100%;
     min-width: 1000px;
     font-family: sans-serif;
-    background-image: url("/images/rough_black_metal_wall.jpg") !important;
+    background-image: url("rough_black_metal_wall.jpg") !important;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
