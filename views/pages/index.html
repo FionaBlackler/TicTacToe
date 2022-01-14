@@ -37,15 +37,16 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
           var socket = io();
-           var player = "X";
-           var O = "O";
+          var currentPlayer = 'O';
           var button = document.getElementById('restart');
-          //var tiles = document.getElementById('tiles');
           const cells = Array.from(document.querySelectorAll(".cell"));
           console.log(cells);
+
+          //EventListener die data senden
           cells.forEach( (cell, index) => {
             cell.addEventListener('click', event => {
               socket.emit('player move', index);
+              currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
             });
           });
 
@@ -53,17 +54,19 @@
              socket.emit('reset board', );
           });
 
+
+          //Reaktionen auf empfangene data
           socket.on('player move', function(data) {
             var item = cells[data];
-            item.textContent = "X";
+            item.textContent = currentPlayer;
           });
 
           socket.on('reset board', function(data) {
+            currentPlayer = 'O';
             cells.forEach( (cell, index) => {
               cell.textContent = "";
             });
           });
-          
         </script>
     </script>
   </body>

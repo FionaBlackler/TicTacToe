@@ -1,18 +1,19 @@
+/* @font-face deklariert custom font für die css */
 @font-face {
 	font-family: neon;
 	src: url(neon.ttf);
 }
 
+/* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
 :root{
-	--clr-neon:#ffff;
+	--clr-neon:hsl(0 0% 100%);
     --clr-neon-hue:hsl(317 200% 54%);
     --clr-player-x: hsl(154 100% 54%);
     --clr-player-o: hsl(38 100% 54%);
 }
 
-body{   
-    margin:0;
-    padding:0;
+/* in body wird alles was auf der seite benutzt wird implentiert : generell font, webseit größe, hintergrund.. */
+body{    
     height: 100%;
 	width: 100%;
     min-width: 1000px;
@@ -23,10 +24,14 @@ body{
     background-size: cover;
 }
 
-*{
+/* the "*{}" means "all elements", so we are setting all elements to have zero margins, and zero padding, thus making them look the same in all browsers.*/
+*{ 
+    margin:0;
+    padding:0;
     box-sizing: border-box; 
 }
 
+/* class title mit neon font und flicker effekt */
 .title{
 	font-family: neon;
     color: var(--clr-neon);
@@ -47,6 +52,7 @@ body{
 	animation: flicker 1.5s infinite alternate; 
 }
 
+/* @keyframes lässt den Autor einzelne Schritte eine CSS-Anmation festlegen, indem er/sie Wegpunkte setzt */
 @keyframes flicker {
     
 	0%, 18%, 22%, 25%, 53%, 57%, 100% {  
@@ -66,6 +72,7 @@ body{
 	}    
 }
 
+/* container für den Hautpteil der Webseit (instructions, board, restartButton) -> flexbox wird definiert */
 .container{
     height: 80vh;  
 	width: 100%;
@@ -81,8 +88,7 @@ body{
     text-align: center;
     font-style: sans-serif;
     font-size: large;
-    display: inline-block;
-    cursor: pointer;
+    display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */
     text-decoration: none;
     color: var(--clr-neon-hue);
     background-color: transparent;
@@ -92,29 +98,17 @@ body{
     text-shadow:
     0 0 0.5em   hsl(0 0% 100% / 0.3),
     0 0 1em var(--clr-neon-hue);
-    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue); /* inset -> innerer Bereich der Textbox */
 }
 
-.playerX {
-    color: var(--clr-player-x);
-    text-shadow:
-    0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-x); 
-}
-
-.playerO {
-    color: var(--clr-player-o);
-    text-shadow: 
-    0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-o); 
-}
-
+/* grobe Definition des Spielfeldes */
 .board{
     width: 450px;
     display: flex;
     flex-wrap: wrap;
 }
 
+/* Definition einzelner Zellen des Spielfeldes */
 .cell{
     width: 150px;
     height: 150px;
@@ -126,20 +120,7 @@ body{
     font-size: 5rem;
 }
 
-#a1,#a3{
-    color: var(--clr-player-x);
-    text-shadow: 
-    0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-x);
-}
-
-#a2{
-    color: var(--clr-player-o);
-    text-shadow: 
-    0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-o); 
-}
-
+/* cell:nth-child(){ border... löscht den äusseren Rand des Spielfeldes */
 .cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
     border-top: none;
 }
@@ -156,12 +137,28 @@ body{
     border-bottom: none;
 }
 
+/* Farbe für Player X */
+.playerX {
+    color: var(--clr-player-x);
+    text-shadow:
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-x); 
+}
+
+/* Farbe für Player O */
+.playerO {
+    color: var(--clr-player-o);
+    text-shadow: 
+    0 0 2em rgba(255, 255, 255, 0),
+	0 0 1em var(--clr-player-o); 
+}
+
+/* Definition des restartButtons im "Ruhe Zustand" */
 .restart {
 	font-style: sans-serif;
     font-size: 2rem;
     display: inline-block;
     cursor: pointer;
-    text-decoration: none;
     color: var(--clr-neon-hue);
     background-color: transparent;
     border: var(--clr-neon-hue) 0.125em solid;
@@ -170,17 +167,20 @@ body{
     text-shadow:
     0 0 0.5em   hsl(0 0% 100% / 0.3),
     0 0 0.75em var(--clr-neon-hue);
-    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);    
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);  
+    transition: background-color 100ms linear;
 }
 
+/* Hover Effekt des restartButtons */
 .restart:hover {
     color: rgba(255, 255, 255, 0.8);
     opacity: 0.8;
-    text-shadow: none;
 	box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
 	background-color:var(--clr-neon-hue);
+    transition: opacity 100ms linear;
 }
 
+/* einfache Fußzeile für Credits */
 .footer{
     text-align: center;
 	color: var(--clr-neon);
