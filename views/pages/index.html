@@ -7,7 +7,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <!-- <script src="./../public/script.js"></script> -->
   </head>
   <body>
     <h1 class="title">TicTacToe</h1>
@@ -19,9 +18,9 @@
                 Second Player as <span class="playerO"><b>Player O</b></span> 
             </p>
             <div class="board">
-                <div class="cell" id="a1">X</div>
-                <div class="cell" id="a2">O</div>
-                <div class="cell" id="a3">X</div>
+                <div class="cell" id="a1"></div>
+                <div class="cell" id="a2"></div>
+                <div class="cell" id="a3"></div>
                 <div class="cell" id="b1"></div>
                 <div class="cell" id="b2"></div>
                 <div class="cell" id="b3"></div>
@@ -29,39 +28,43 @@
                 <div class="cell" id="c2"></div>
                 <div class="cell" id="c3"></div>
             </div>              
-            <button class="restart"><b>Restart</b></button>
+            <button class="restart" id="restart"><b>Restart</b></button>
         </div>
         <p class="footer">         
           <small>Brought to you by Tobias Mayer, Felix Walker, Fiona Blackler</small>
         </p>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+          var socket = io();
+           var player = "X";
+           var O = "O";
+          var button = document.getElementById('restart');
+          //var tiles = document.getElementById('tiles');
+          const cells = Array.from(document.querySelectorAll(".cell"));
+          console.log(cells);
+          cells.forEach( (cell, index) => {
+            cell.addEventListener('click', event => {
+              socket.emit('player move', index);
+            });
+          });
 
+          button.addEventListener('click', event => {
+             socket.emit('reset board', );
+          });
 
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
+          socket.on('player move', function(data) {
+            var item = cells[data];
+            item.textContent = "X";
+          });
 
-      var messages = document.getElementById('messages');
-      var form = document.getElementById('form');
-      var input = document.getElementById('input');
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (input.value) {
-          socket.emit('chat message', input.value);
-          input.value = '';
-        }
-      });
-
-      socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-      });
+          socket.on('reset board', function(data) {
+            cells.forEach( (cell, index) => {
+              cell.textContent = "";
+            });
+          });
+          
+        </script>
     </script>
   </body>
 </html>
