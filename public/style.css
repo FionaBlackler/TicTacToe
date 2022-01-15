@@ -55,9 +55,8 @@ body{
     0 0 102px var(--clr-neon-hue),
     0 0 151px var(--clr-neon-hue);
     text-align: center;
-    padding-top: 2.5%;
-    padding-bottom: 0.5em;
     padding-left:2em;
+    padding-bottom: 0.5em;
     text-transform: uppercase;
     font-size: 5rem;
     animation: flicker 1.5s infinite alternate; 
@@ -85,10 +84,10 @@ body{
 
 #result{
     text-align: center;
-    padding-left: 13.5em;
+    padding-left: 7.5em;
     color: var(--clr-neon-hue);
     font-family: eighties;
-    font-size: small;
+    font-size: x-large;
     text-shadow:
     0 0 0.5em   hsl(0 0% 100% / 0.3),
     0 0 1em var(--clr-neon-hue);
