@@ -22,9 +22,15 @@ io.on('connection', (socket) => {
   });
 
   //Server get data and reacts
-  socket.on('reset board', (data) => {
-    console.log('message: ' + data);
-    io.emit('reset board', data);
+
+  socket.on('player won', (data) => {
+    console.log('player: ' + data + " won");
+    io.emit('player won', data);
+  });
+
+  socket.on('player tie', (data) => {
+    console.log("its a tie");
+    io.emit('player tie', data);
   });
 
   socket.on('player move', (data) => {
@@ -32,9 +38,9 @@ io.on('connection', (socket) => {
     io.emit('player move', data);
   });
 
-  socket.on('player won', (data) => {
-    console.log('player: ' + data + " won");
-    io.emit('player won', data);
+  socket.on('reset board', (data) => {
+    console.log('message: ' + data);
+    io.emit('reset board', data);
   });
 
 });

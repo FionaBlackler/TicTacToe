@@ -10,7 +10,8 @@
   </head>
   <body>
     <h1 class="title">TicTacToe</h1>
-        <div class="container">                       
+        <div class="container">  
+            <div id="result"></div>    
             <p class="instructions">
                 Game starts by clicking on a box.<br>
                 First Player starts as <span id="playerX"><b>Player X</b></span><br>
@@ -33,7 +34,6 @@
         <p class="footer">         
           <small>Brought to you by Tobias Mayer, Felix Walker, Fiona Blackler</small>
         </p>
-        
         <script src="/socket.io/socket.io.js"></script>
         <script>
           var socket = io();
@@ -52,7 +52,8 @@
 
           const PLAYERX_WON = 'PLAYERX_WON';
           const PLAYERO_WON = 'PLAYERO_WON';
-          let isGameActive = true;
+          const TIE = 'TIE';
+          var isGameActive = true;
           var board = ['', '', '', '', '', '', '', '', ''];
 
           const winningConditions = [
@@ -83,40 +84,51 @@
             }
 
             if (roundWon) {
-              console.log("PLAYER_WON");
               socket.emit('player won', currentPlayer);
             }
+            if (!board.includes('')) {
+              socket.emit('player tie', TIE);
+            }
           }
-          
-          
 
           //Achtet auf click die data senden
-          if (isGameActive === true) {
-            cells.forEach( (cell, index) => {
+          cells.forEach( (cell, index) => {
               cell.addEventListener('click', event => {
-                if (cell.textContent === "") {
+                if (cell.textContent === "" && isGameActive) {
                   socket.emit('player move', index);
                 }
               });
-            });
-          }
+          });
 
           //Reset button click
-          //if (isGameActive === false) {
           button.addEventListener('click', event => {
-             socket.emit('reset board', );
+            if (!isGameActive) {
+             socket.emit('reset board',);
+            }
           });
-          //}
+          
+          //
+          //SOCKET.ONs
+          //
 
           //Reaktion wenn spieler gewinnt
           socket.on('player won', function(data) {
-            data === 'X' ? PLAYERX_WON : PLAYERO_WON
             isGameActive = false;
+            gameResult = data === 'X' ? PLAYERX_WON : PLAYERO_WON
+            var resultBox = document.getElementById('result');
+            resultBox.textContent = gameResult;
+          });
+
+          //Reaktion wenn spiele unentschieden
+          socket.on('player tie', function(data) {
+            isGameActive = false;
+            var resultBox = document.getElementById('result');
+            gameResult = data;
+            resultBox.textContent = gameResult;
           });
 
           //Reaktionen auf empfangene data
           socket.on('player move', function(data) {
-            handleResultValidation();
             //set Player Color
             if (currentPlayer==="X") {
             cells[data].setAttribute("id","playerX");
@@ -127,18 +139,22 @@
             board[data] = currentPlayer;
             //set X or O in clicked cell
             cells[data].textContent = currentPlayer;
+            handleResultValidation();
             //switch players
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
           });
 
           //Reset board moves
           socket.on('reset board', function(data) {
+            //set game activ
+            isGameActive=true;
             //reset player turn
             currentPlayer = 'X';
             //reset moves
             cells.forEach( (cell, index) => {
               board[index] = "";
               cell.textContent = "";
+              resultBox.textContent = "";
             });
           });
 
