@@ -10,8 +10,8 @@
   </head>
   <body>
     <h1 class="title">TicTacToe</h1>
-        <div class="container">  
-            <div id="result"></div>    
+        <div id="result"></div>
+        <div class="container">      
             <p class="instructions">
                 Game starts by clicking on a box.<br>
                 First Player starts as <span id="playerX"><b>Player X</b></span><br>
@@ -154,8 +154,8 @@
             cells.forEach( (cell, index) => {
               board[index] = "";
               cell.textContent = "";
-              resultBox.textContent = "";
             });
+            resultBox.textContent = "";
           });
 
         </script>
