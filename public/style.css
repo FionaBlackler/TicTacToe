@@ -1,12 +1,22 @@
 /* @font-face deklariert custom font für die css */
 @font-face {
-	font-family: neon;
-	src: url(neon.ttf);
+    font-family: neon;
+    src: url(neon.ttf);
+}
+
+@font-face {
+    font-family: futuristic;
+    src: url(NeogreyRegular.otf);
+}
+
+@font-face {
+    font-family: eighties;
+    src: url(good-times-rg.otf);
 }
 
 /* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
 :root{
-	--clr-neon:hsl(0 0% 100%);
+    --clr-neon:hsl(0 0% 100%);
     --clr-neon-hue:hsl(317 200% 54%);
     --clr-player-x: hsl(154 100% 54%);
     --clr-player-o: hsl(38 100% 54%);
@@ -15,7 +25,7 @@
 /* in body wird alles was auf der seite benutzt wird implentiert : generell font, webseit größe, hintergrund.. */
 body{    
     height: 100%;
-	width: 100%;
+    width: 100%;
     min-width: 1000px;
     font-family: sans-serif;
     background-image: url("rough_black_metal_wall.jpg") !important;
@@ -33,49 +43,50 @@ body{
 
 /* class title mit neon font und flicker effekt */
 .title{
-	font-family: neon;
+    font-family: neon;
     color: var(--clr-neon);
-	text-shadow:
-	0 0 7px var(--clr-neon),
-	0 0 10px var(--clr-neon),
-	0 0 21px var(--clr-neon),
-	0 0 42px var(--clr-neon-hue),
-	0 0 82px var(--clr-neon-hue),
-	0 0 92px var(--clr-neon-hue),
-	0 0 102px var(--clr-neon-hue),
-	0 0 151px var(--clr-neon-hue);
-	text-align: center;
-	padding-top: 2.5%;
-	padding-left:6.5%;
-	text-transform: uppercase;
-	font-size: 5rem;
-	animation: flicker 1.5s infinite alternate; 
+    text-shadow:
+    0 0 7px var(--clr-neon),
+    0 0 10px var(--clr-neon),
+    0 0 21px var(--clr-neon),
+    0 0 42px var(--clr-neon-hue),
+    0 0 82px var(--clr-neon-hue),
+    0 0 92px var(--clr-neon-hue),
+    0 0 102px var(--clr-neon-hue),
+    0 0 151px var(--clr-neon-hue);
+    text-align: center;
+    padding-top: 2.5%;
+    padding-bottom: 0.5em;
+    padding-left:2em;
+    text-transform: uppercase;
+    font-size: 5rem;
+    animation: flicker 1.5s infinite alternate; 
 }
 
 /* @keyframes lässt den Autor einzelne Schritte eine CSS-Anmation festlegen, indem er/sie Wegpunkte setzt */
 @keyframes flicker {
     
-	0%, 18%, 22%, 25%, 53%, 57%, 100% {  
-		text-shadow:
-		0 0 4px var(--clr-neon),
-		0 0 11px var(--clr-neon),
-		0 0 19px var(--clr-neon),
-		0 0 40px var(--clr-neon-hue),
-		0 0 80px var(--clr-neon-hue),
-		0 0 90px var(--clr-neon-hue),
-		0 0 100px var(--clr-neon-hue),
-		0 0 150px var(--clr-neon-hue);	
-	}
-	
-	20%, 24%, 55% {        
-		text-shadow: none;
-	}    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {  
+        text-shadow:
+        0 0 4px var(--clr-neon),
+        0 0 11px var(--clr-neon),
+        0 0 19px var(--clr-neon),
+        0 0 40px var(--clr-neon-hue),
+        0 0 80px var(--clr-neon-hue),
+        0 0 90px var(--clr-neon-hue),
+        0 0 100px var(--clr-neon-hue),
+        0 0 150px var(--clr-neon-hue);  
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }    
 }
 
 /* container für den Hautpteil der Webseit (instructions, board, restartButton) -> flexbox wird definiert */
 .container{
     height: 80vh;  
-	width: 100%;
+    width: 100%;
     min-width: 1000px;
     display: flex;
     align-items: center;
@@ -86,8 +97,8 @@ body{
 .instructions{
     margin-top: 2%;
     text-align: center;
-    font-style: sans-serif;
-    font-size: large;
+    font-family: eighties;
+    font-size: small;
     display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */
     text-decoration: none;
     color: var(--clr-neon-hue);
@@ -142,7 +153,7 @@ body{
     color: var(--clr-player-x);
     text-shadow:
     0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-x); 
+    0 0 1em var(--clr-player-x); 
 }
 
 /* Farbe für Player O */
@@ -150,13 +161,13 @@ body{
     color: var(--clr-player-o);
     text-shadow: 
     0 0 2em rgba(255, 255, 255, 0),
-	0 0 1em var(--clr-player-o); 
+    0 0 1em var(--clr-player-o); 
 }
 
 /* Definition des restartButtons im "Ruhe Zustand" */
 .restart {
-	font-style: sans-serif;
-    font-size: 2rem;
+    font-family: futuristic;
+    font-size: x-large;
     display: inline-block;
     cursor: pointer;
     color: var(--clr-neon-hue);
@@ -175,16 +186,17 @@ body{
 .restart:hover {
     color: rgba(255, 255, 255, 0.8);
     opacity: 0.8;
-	box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
-	background-color:var(--clr-neon-hue);
+    box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
+    background-color:var(--clr-neon-hue);
     transition: opacity 100ms linear;
 }
 
 /* einfache Fußzeile für Credits */
 .footer{
     text-align: center;
-	color: var(--clr-neon);
+    font-family: eighties;
+    color: var(--clr-neon);
     padding-top: 5%;
-    padding-left:8%;
+    padding-left:10em;
     opacity: 0.5;
 }
