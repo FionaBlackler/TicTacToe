@@ -48,6 +48,7 @@
 
           var currentPlayer = 'X';
           var button = document.getElementById('restart');
+          var resultBox = document.getElementById('result');
           const cells = Array.from(document.querySelectorAll(".cell"));
 
           const PLAYERX_WON = 'PLAYERX_WON';
@@ -115,14 +116,12 @@
           socket.on('player won', function(data) {
             isGameActive = false;
             gameResult = data === 'X' ? PLAYERX_WON : PLAYERO_WON
-            var resultBox = document.getElementById('result');
             resultBox.textContent = gameResult;
           });
 
           //Reaktion wenn spiele unentschieden
           socket.on('player tie', function(data) {
             isGameActive = false;
-            var resultBox = document.getElementById('result');
             gameResult = data;
             resultBox.textContent = gameResult;
           });
@@ -146,6 +145,7 @@
 
           //Reset board moves
           socket.on('reset board', function(data) {
+            resultBox.textContent = "";
             //set game activ
             isGameActive=true;
             //reset player turn
@@ -155,7 +155,6 @@
               board[index] = "";
               cell.textContent = "";
             });
-            resultBox.textContent = "";
           });
 
         </script>
