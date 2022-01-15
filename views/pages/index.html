@@ -13,20 +13,20 @@
         <div class="container">                       
             <p class="instructions">
                 Game starts by clicking on a box.<br>
-                First Player starts as <span class="playerX"><b>Player X</b></span><br>
+                First Player starts as <span id="playerX"><b>Player X</b></span><br>
                 and<br>
-                Second Player as <span class="playerO"><b>Player O</b></span> 
+                Second Player as <span id="playerO"><b>Player O</b></span> 
             </p>
             <div class="board">
-                <div class="cell" id="a1"></div>
-                <div class="cell" id="a2"></div>
-                <div class="cell" id="a3"></div>
-                <div class="cell" id="b1"></div>
-                <div class="cell" id="b2"></div>
-                <div class="cell" id="b3"></div>
-                <div class="cell" id="c1"></div>
-                <div class="cell" id="c2"></div>
-                <div class="cell" id="c3"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
             </div>              
             <button class="restart" id="restart"><b>Restart</b></button>
         </div>
@@ -37,36 +37,111 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
           var socket = io();
-          var currentPlayer = 'O';
+
+          // const userIds = [];
+          // if (userIds <= 0) {
+          // var userId = prompt("Enter a name");
+          // } else {
+            
+          // }
+          // userIds.push("userId");
+
+          var currentPlayer = 'X';
           var button = document.getElementById('restart');
           const cells = Array.from(document.querySelectorAll(".cell"));
-          console.log(cells);
 
-          //EventListener die data senden
-          cells.forEach( (cell, index) => {
-            cell.addEventListener('click', event => {
-              socket.emit('player move', index);
-              currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+          const PLAYERX_WON = 'PLAYERX_WON';
+          const PLAYERO_WON = 'PLAYERO_WON';
+          let isGameActive = true;
+          var board = ['', '', '', '', '', '', '', '', ''];
+
+          const winningConditions = [
+              [0, 1, 2],
+              [3, 4, 5],
+              [6, 7, 8],
+              [0, 3, 6],
+              [1, 4, 7],
+              [2, 5, 8],
+              [0, 4, 8],
+              [2, 4, 6]
+          ];
+          
+          function handleResultValidation() {
+            let roundWon = false;
+            for (let i = 0; i <= 7; i++) {
+                const winCondition = winningConditions[i];
+                const a = board[winCondition[0]];
+                const b = board[winCondition[1]];
+                const c = board[winCondition[2]];
+                if (a === '' || b === '' || c === '') {
+                    continue;
+                }
+                if (a === b && b === c) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+              console.log("PLAYER_WON");
+              socket.emit('player won', currentPlayer);
+            }
+          }
+          
+          
+
+          //Achtet auf click die data senden
+          if (isGameActive === true) {
+            cells.forEach( (cell, index) => {
+              cell.addEventListener('click', event => {
+                if (cell.textContent === "") {
+                  socket.emit('player move', index);
+                }
+              });
             });
-          });
+          }
 
+          //Reset button click
+          //if (isGameActive === false) {
           button.addEventListener('click', event => {
              socket.emit('reset board', );
           });
+          //}
 
+          //Reaktion wenn spieler gewinnt
+          socket.on('player won', function(data) {
+            data === 'X' ? PLAYERX_WON : PLAYERO_WON
+            isGameActive = false;
+          });
 
           //Reaktionen auf empfangene data
           socket.on('player move', function(data) {
-            var item = cells[data];
-            item.textContent = currentPlayer;
+            handleResultValidation();
+            //set Player Color
+            if (currentPlayer==="X") {
+            cells[data].setAttribute("id","playerX");
+            } else {
+            cells[data].setAttribute("id","playerO");
+            }
+            //add board state
+            board[data] = currentPlayer;
+            //set X or O in clicked cell
+            cells[data].textContent = currentPlayer;
+            //switch players
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
           });
 
+          //Reset board moves
           socket.on('reset board', function(data) {
-            currentPlayer = 'O';
+            //reset player turn
+            currentPlayer = 'X';
+            //reset moves
             cells.forEach( (cell, index) => {
+              board[index] = "";
               cell.textContent = "";
             });
           });
+
         </script>
     </script>
   </body>

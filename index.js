@@ -12,8 +12,6 @@ app.get('/', (req, res) => {
 
 app.use(express.static(__dirname + '/public'));
 
-var board = ['', '', '', '', '', '', '', '', ''];
-
 //User Connects
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -32,6 +30,11 @@ io.on('connection', (socket) => {
   socket.on('player move', (data) => {
     console.log('message: ' + data);
     io.emit('player move', data);
+  });
+
+  socket.on('player won', (data) => {
+    console.log('player: ' + data + " won");
+    io.emit('player won', data);
   });
 
 });

@@ -138,7 +138,7 @@ body{
 }
 
 /* Farbe für Player X */
-.playerX {
+#playerX {
     color: var(--clr-player-x);
     text-shadow:
     0 0 2em rgba(255, 255, 255, 0),
@@ -146,7 +146,7 @@ body{
 }
 
 /* Farbe für Player O */
-.playerO {
+#playerO {
     color: var(--clr-player-o);
     text-shadow: 
     0 0 2em rgba(255, 255, 255, 0),
