@@ -83,6 +83,18 @@ body{
     }    
 }
 
+#result{
+    text-align: center;
+    padding-left: 13.5em;
+    color: var(--clr-neon-hue);
+    font-family: eighties;
+    font-size: small;
+    text-shadow:
+    0 0 0.5em   hsl(0 0% 100% / 0.3),
+    0 0 1em var(--clr-neon-hue);
+
+}
+
 /* container für den Hautpteil der Webseit (instructions, board, restartButton) -> flexbox wird definiert */
 .container{
     height: 80vh;  
