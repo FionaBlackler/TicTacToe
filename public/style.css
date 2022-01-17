@@ -1,17 +1,16 @@
-/* @font-face deklariert custom font für die css */
 @font-face {
     font-family: neon;
-    src: url(../fonts/neon.ttf);
+    src: url(/fonts/neon.ttf);
 }
 
 @font-face {
     font-family: futuristic;
-    src: url(../fonts/NeogreyRegular.otf);
+    src: url(/fonts/NeogreyRegular.otf);
 }
 
 @font-face {
     font-family: eighties;
-    src: url(../fonts/good-times-rg.otf);
+    src: url(/fonts/good-times-rg.otf);
 }
 
 /* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
