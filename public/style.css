@@ -1,5 +1,4 @@
-
-/*@font-face erstellt */ 
+/*@font-face um benutzerdefinierte Fonts benutzen zu können */ 
 @font-face {
     font-family: neon;
     src: url(neon.ttf);
@@ -15,7 +14,7 @@
     src: url(good-times-rg.otf);
 }
 
-/* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
+/* in :root werden variablen deklariert um sie später benutzen zu können -> einfachheitshalber */
 :root{
     --clr-neon:hsl(0 0% 100%);
     --clr-neon-hue:hsl(317 200% 54%);
@@ -23,28 +22,29 @@
     --clr-player-o: hsl(38 100% 54%);
 }
 
-/* in body wird alles was auf der seite benutzt wird implentiert : generell font, webseit größe, hintergrund.. */
 body{    
     height: 100%;
     width: 100%;
     min-width: 1000px;
-    font-family: sans-serif;
     background-image: url("rough_black_metal_wall.jpg") !important;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-/* the "*{}" means "all elements", so we are setting all elements to have zero margins, and zero padding, thus making them look the same in all browsers.*/
+/* alle elemente haben keine margins und kein padding, was sie in in alles Browsern gleich aussehen lässt*/
 *{ 
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box; 
 }
 
-/* class title mit neon font und flicker effekt */
-.title{
+.title{   
+    padding-bottom: 0.5em;
+    padding-left: 2em;
+    text-align: center;   
     font-family: neon;
+    font-size: 5rem;
     color: var(--clr-neon);
     text-shadow:
     0 0 7px var(--clr-neon),
@@ -55,11 +55,7 @@ body{
     0 0 92px var(--clr-neon-hue),
     0 0 102px var(--clr-neon-hue),
     0 0 151px var(--clr-neon-hue);
-    text-align: center;
-    padding-bottom: 0.5em;
-    padding-left:2em;
     text-transform: uppercase;
-    font-size: 5rem;
     animation: flicker 1.5s infinite alternate; 
 }
 
@@ -83,9 +79,9 @@ body{
     }    
 }
 
-#result{
-    text-align: center;
+#result{   
     padding-left: 7.5em;
+    text-align: center; 
     font-family: eighties;
     font-size: x-large;
     color: var(--clr-neon);
@@ -96,7 +92,6 @@ body{
     0 0 42px var(--clr-neon),
     0 0 82px var(--clr-neon-hue),
     0 0 92px var(--clr-neon-hue);
-
 }
 
 /* container für den Hautpteil der Webseit (instructions, board, restartButton) -> flexbox wird definiert */
@@ -111,16 +106,16 @@ body{
 }
 
 .instructions{
-    margin-top: 2%;
-    text-align: center;
-    font-family: eighties;
-    font-size: small;
-    display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */
-    text-decoration: none;
-    background-color: transparent;
+    margin-top: 2%;    
+    display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */   
     border: var(--clr-neon-hue) 0.125em solid;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue); /* inset -> innerer Bereich der Textbox */
     padding: 0.25em 1em;
     border-radius: 0.25em;
+    background-color: transparent;
+    text-align: center;    
+    font-family: eighties;
+    font-size: small;
     color: var(--clr-neon);
     text-shadow:
     0 0 7px var(--clr-neon),
@@ -128,8 +123,7 @@ body{
     0 0 21px var(--clr-neon-hue),
     0 0 42px var(--clr-neon),
     0 0 82px var(--clr-neon-hue),
-    0 0 92px var(--clr-neon-hue);
-    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue); /* inset -> innerer Bereich der Textbox */
+    0 0 92px var(--clr-neon-hue);   
 }
 
 /* grobe Definition des Spielfeldes */
@@ -151,19 +145,16 @@ body{
     font-size: 5rem;
 }
 
-/* cell:nth-child(){ border... löscht den äusseren Rand des Spielfeldes */
+/* cell:nth-child(){ border... } löscht den äußeren Rand des Spielfeldes */
 .cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
     border-top: none;
 }
-
 .cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
     border-left: none;
 }
-
 .cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
     border-right: none;
 }
-
 .cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
     border-bottom: none;
 }
@@ -184,15 +175,16 @@ body{
     0 0 1em var(--clr-player-o); 
 }
 
-/* Definition des restartButtons im "Ruhe Zustand" */
-.restart {
+/* Definition des Restart-Buttons im "Ruhe Zustand" */
+.restart {   
+    display: inline-block;
+    cursor: pointer;    
+    border: var(--clr-neon-hue) 0.125em solid;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);  
+    padding: 0.25em 1em; 
+    background-color: transparent;
     font-family: futuristic;
     font-size: x-large;
-    display: inline-block;
-    cursor: pointer;
-    background-color: transparent;
-    border: var(--clr-neon-hue) 0.125em solid;
-    padding: 0.25em 1em;
     border-radius: 0.25em;
     color: var(--clr-neon);
     text-shadow:
@@ -201,26 +193,25 @@ body{
     0 0 21px var(--clr-neon-hue),
     0 0 42px var(--clr-neon),
     0 0 82px var(--clr-neon-hue),
-    0 0 92px var(--clr-neon-hue);
-    box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);  
+    0 0 92px var(--clr-neon-hue);   
     transition: background-color 100ms linear;
 }
 
-/* Hover Effekt des restartButtons */
+/* Hover Effekt des Restart-Buttons */
 .restart:hover {
     color: rgba(255, 255, 255, 0.8);
-    opacity: 0.8;
-    box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
     background-color:var(--clr-neon-hue);
+    box-shadow: 0 0 2em 0.5em var(--clr-neon-hue);
+    opacity: 0.8;
     transition: opacity 100ms linear;
 }
 
-/* einfache Fußzeile für Credits */
-.footer{
+/* Credits */
+.footer{    
+    padding-top: 5%;
+    padding-left: 10em;
     text-align: center;
     font-family: eighties;
     color: var(--clr-neon);
-    padding-top: 5%;
-    padding-left:10em;
     opacity: 0.5;
 }
