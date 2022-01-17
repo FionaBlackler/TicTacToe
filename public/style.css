@@ -1,16 +1,18 @@
+
+/*@font-face erstellt */ 
 @font-face {
     font-family: neon;
-    src: url(/fonts/neon.ttf);
+    src: url(neon.ttf);
 }
 
 @font-face {
     font-family: futuristic;
-    src: url(/fonts/NeogreyRegular.otf);
+    src: url(NeogreyRegular.otf);
 }
 
 @font-face {
     font-family: eighties;
-    src: url(/fonts/good-times-rg.otf);
+    src: url(good-times-rg.otf);
 }
 
 /* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
@@ -54,7 +56,6 @@ body{
     0 0 102px var(--clr-neon-hue),
     0 0 151px var(--clr-neon-hue);
     text-align: center;
-    padding-top: 2.5%;
     padding-bottom: 0.5em;
     padding-left:2em;
     text-transform: uppercase;
@@ -84,13 +85,17 @@ body{
 
 #result{
     text-align: center;
-    padding-left: 13.5em;
-    color: var(--clr-neon-hue);
+    padding-left: 7.5em;
     font-family: eighties;
-    font-size: small;
+    font-size: x-large;
+    color: var(--clr-neon);
     text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 1em var(--clr-neon-hue);
+    0 0 7px var(--clr-neon),
+    0 0 10px var(--clr-neon-hue),
+    0 0 21px var(--clr-neon-hue),
+    0 0 42px var(--clr-neon),
+    0 0 82px var(--clr-neon-hue),
+    0 0 92px var(--clr-neon-hue);
 
 }
 
@@ -112,14 +117,18 @@ body{
     font-size: small;
     display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */
     text-decoration: none;
-    color: var(--clr-neon-hue);
     background-color: transparent;
     border: var(--clr-neon-hue) 0.125em solid;
     padding: 0.25em 1em;
     border-radius: 0.25em;
+    color: var(--clr-neon);
     text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 1em var(--clr-neon-hue);
+    0 0 7px var(--clr-neon),
+    0 0 10px var(--clr-neon-hue),
+    0 0 21px var(--clr-neon-hue),
+    0 0 42px var(--clr-neon),
+    0 0 82px var(--clr-neon-hue),
+    0 0 92px var(--clr-neon-hue);
     box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue); /* inset -> innerer Bereich der Textbox */
 }
 
@@ -181,14 +190,18 @@ body{
     font-size: x-large;
     display: inline-block;
     cursor: pointer;
-    color: var(--clr-neon-hue);
     background-color: transparent;
     border: var(--clr-neon-hue) 0.125em solid;
     padding: 0.25em 1em;
     border-radius: 0.25em;
+    color: var(--clr-neon);
     text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 0.75em var(--clr-neon-hue);
+    0 0 7px var(--clr-neon),
+    0 0 10px var(--clr-neon-hue),
+    0 0 21px var(--clr-neon-hue),
+    0 0 42px var(--clr-neon),
+    0 0 82px var(--clr-neon-hue),
+    0 0 92px var(--clr-neon-hue);
     box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue);  
     transition: background-color 100ms linear;
 }
