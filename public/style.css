@@ -1,17 +1,17 @@
 /* @font-face deklariert custom font für die css */
 @font-face {
     font-family: neon;
-    src: url(neon.ttf);
+    src: url(../fonts/neon.ttf);
 }
 
 @font-face {
     font-family: futuristic;
-    src: url(NeogreyRegular.otf);
+    src: url(../fonts/NeogreyRegular.otf);
 }
 
 @font-face {
     font-family: eighties;
-    src: url(good-times-rg.otf);
+    src: url(../fonts/good-times-rg.otf);
 }
 
 /* in :root deklariert man variablen um sie später benutzen zu können -> einfachheitshalber */
@@ -55,8 +55,9 @@ body{
     0 0 102px var(--clr-neon-hue),
     0 0 151px var(--clr-neon-hue);
     text-align: center;
-    padding-left:2em;
+    padding-top: 2.5%;
     padding-bottom: 0.5em;
+    padding-left:2em;
     text-transform: uppercase;
     font-size: 5rem;
     animation: flicker 1.5s infinite alternate; 
@@ -84,10 +85,10 @@ body{
 
 #result{
     text-align: center;
-    padding-left: 7.5em;
+    padding-left: 13.5em;
     color: var(--clr-neon-hue);
     font-family: eighties;
-    font-size: x-large;
+    font-size: small;
     text-shadow:
     0 0 0.5em   hsl(0 0% 100% / 0.3),
     0 0 1em var(--clr-neon-hue);
