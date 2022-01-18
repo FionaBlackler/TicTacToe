@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
   } else if (clientOne == clientTwo) {
     clientTwo = socket.id;
     playerCount += 1;
-  } 
+  }
 
   console.log('Client ID 1: ' + clientOne);
   console.log('Client ID 2: ' + clientTwo);

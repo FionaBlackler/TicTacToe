@@ -137,7 +137,7 @@
         socket.on('set player', function (data) {
           yourPlayer = data;
           playerBox.innerText = "You are: " + yourPlayer
-          playerTurn.innerText=currentPlayer+" player turn";
+          playerTurn.innerText = currentPlayer + " player turn";
         });
 
         //Reaction on player win
@@ -145,8 +145,8 @@
           isGameActive = false;
           gameResult = data === 'X' ? PLAYERX_WON : PLAYERO_WON
           resultBox.textContent = gameResult;
-          playerTurn.innerText="";
-          gameStatus.innerText="Game ended please restart";
+          playerTurn.innerText = "";
+          gameStatus.innerText = "Game ended please restart";
         });
 
         //Reaction on tie
@@ -154,8 +154,8 @@
           isGameActive = false;
           gameResult = data;
           resultBox.textContent = gameResult;
-          playerTurn.innerText="";
-          gameStatus.innerText="Game ended please restart";
+          playerTurn.innerText = "";
+          gameStatus.innerText = "Game ended please restart";
         });
 
         //Reaction on player move
@@ -173,7 +173,7 @@
           handleResultValidation();
           //switch players
           currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-          playerTurn.innerText=currentPlayer+" player turn";
+          playerTurn.innerText = currentPlayer + " player turn";
         });
 
         //Restart game
@@ -188,7 +188,8 @@
             board[index] = "";
             cell.textContent = "";
           });
-          gameStatus.innerText="Game is in progress";
+          gameStatus.innerText = "Game is in progress";
+          playerTurn.innerText = currentPlayer + " player turn";
         });
       }
     }
