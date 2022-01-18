@@ -23,6 +23,7 @@ var playerCount = 0;
 io.on('connection', (socket) => {
   console.log('a user connected with the ID: ' + socket.id);
 
+  //Ids saved
   if (clientOne !== null && clientTwo !== null) {
     console.log("Sorry server is full!");
   } else if (clientOne == null) {
@@ -39,10 +40,6 @@ io.on('connection', (socket) => {
   console.log('Client ID 1: ' + clientOne);
   console.log('Client ID 2: ' + clientTwo);
 
-  //zuweisung von socketid zu player x und o
-  //fallunterscheidungen player x belegt o nicht, o und x wenn x disco, beide belegt
-  //bei weiterer connection nichts belegen (passiert in html)
-
   //User Disconnects
   socket.on('disconnect', () => {
     console.log('');
@@ -50,6 +47,7 @@ io.on('connection', (socket) => {
     console.log('Client ID 1: ' + clientOne);
     console.log('Client ID 2: ' + clientTwo);
 
+    //Ids updated
     if (!(socket.id == clientOne || socket.id == clientTwo)) {
       return;
     } else if (clientTwo == socket.id) {
@@ -63,9 +61,9 @@ io.on('connection', (socket) => {
     io.emit('restart board');
   });
 
-  //Server get data and react
-  console.log(playerCount)
+  console.log("player count " + playerCount + " of 2")
 
+  //Server get data and react
   socket.on('game ready', function (data) {
     if (playerCount == 2) {
       io.emit('game ready', true);
