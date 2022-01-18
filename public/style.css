@@ -39,8 +39,7 @@ body{
     box-sizing: border-box; 
 }
 
-.title{   
-    padding-bottom: 0.5em;
+.title{
     padding-left: 2em;
     text-align: center;   
     font-family: neon;
@@ -79,9 +78,24 @@ body{
     }    
 }
 
-#result{   
-    padding-left: 7.5em;
-    text-align: center; 
+/* Container für Game-Status/Result/Player-ID */
+.gamePlay{
+    text-align: center;
+    padding-left: 13em;
+    font-family: eighties;
+    font-size: small;
+    color: var(--clr-neon);
+    text-shadow:
+    0 0 0.5em   hsl(0 0% 100% / 0.3),
+    0 0 1em var(--clr-neon);
+}
+
+#player{
+    font-size: large;
+}
+
+#result{
+    text-align: center;
     font-family: eighties;
     font-size: x-large;
     color: var(--clr-neon);
@@ -90,42 +104,9 @@ body{
     0 0 1em var(--clr-neon-hue);
 }
 
-#player{
-    text-align: center;
-    padding-left: 13.5em;
-    color: var(--clr-neon-hue);
-    font-family: eighties;
-    font-size: small;
-    text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 1em var(--clr-neon-hue);
-}
-
-#gameStatus{
-    text-align: center;
-    padding-left: 13.5em;
-    color: var(--clr-neon-hue);
-    font-family: eighties;
-    font-size: small;
-    text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 1em var(--clr-neon-hue);
-}
-
-#turn{
-    text-align: center;
-    padding-left: 13.5em;
-    color: var(--clr-neon-hue);
-    font-family: eighties;
-    font-size: small;
-    text-shadow:
-    0 0 0.5em   hsl(0 0% 100% / 0.3),
-    0 0 1em var(--clr-neon-hue);
-}
-
 /* container für den Hautpteil der Webseit (instructions, board, restartButton) -> flexbox wird definiert */
 .container{
-    height: 80vh;  
+    height: 65vh;  
     width: 100%;
     min-width: 1000px;
     display: flex;
@@ -134,8 +115,19 @@ body{
     flex-direction: row;
 }
 
-.instructions{
-    margin-top: 2%;    
+#turn{
+    font-family: eighties;
+    padding-left: 4.5em;
+    padding-bottom: 1.5em;
+    font-size: large;
+    color: var(--clr-neon);
+    text-shadow:
+    0 0 0.5em   hsl(0 0% 100% / 0.3),
+    0 0 1em var(--clr-neon);
+}
+
+.instructions{   
+    padding-bottom: 8em;
     display: inline-block; /* lässt height und width verändern und respektiert margin und padding elemente */   
     border: var(--clr-neon-hue) 0.125em solid;
     box-shadow: inset 0 0 0.5em 0 var(--clr-neon-hue), 0 0 0.55em 0 var(--clr-neon-hue); /* inset -> innerer Bereich der Textbox */

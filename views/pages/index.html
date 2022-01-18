@@ -18,18 +18,26 @@
 </head>
 
 <body>
-  <h1 class="title">TicTacToe</h1>
-  <div id="result"></div>
-  <div id="player"></div>
-  <div id="turn"></div>
-  <div id="gameStatus">1/2 players</div>
-  <div class="container">
-    <p class="instructions">
-      Game starts by clicking on a box.<br>
-      First Player starts as <span id="playerX"><b>Player X</b></span><br>
-      and<br>
-      Second Player as <span id="playerO"><b>Player O</b></span>
+  <h1 class="title">TicTacToe</h1> 
+  
+  
+    <p class="gamePlay"> 
+      <span id="player"></span><br>
+      <span id="gameStatus">1/2 players</span><br><br>
+      <span id="result"></span>
     </p>
+
+  <div class="container">
+    
+      <div class="wrapper">
+        <div id="turn"></div>
+        <p class="instructions">
+          Game starts by clicking on a box.<br>
+          First Player starts as <span id="playerX"><b>Player X</b></span><br>
+          and<br> Second Player as <span id="playerO"><b>Player O</b></span> 
+        </p>
+      </div> 
+   
     <div class="board">
       <div class="cell"></div>
       <div class="cell"></div>
@@ -61,9 +69,9 @@
     var playerTurn = document.getElementById('turn');
     const cells = Array.from(document.querySelectorAll(".cell"));
 
-    const PLAYERX_WON = 'PLAYERX_WON';
-    const PLAYERO_WON = 'PLAYERO_WON';
-    const TIE = 'TIE';
+    const PLAYERX_WON = 'PLAYER X WON';
+    const PLAYERO_WON = 'PLAYER O WON';
+    const TIE = "IT'S A TIE";
 
     var board = ['', '', '', '', '', '', '', '', ''];
     const winningConditions = [
@@ -136,7 +144,7 @@
         //Sets if you X or O
         socket.on('set player', function (data) {
           yourPlayer = data;
-          playerBox.innerText = "You are: " + yourPlayer
+          playerBox.innerText = "You are " + yourPlayer
           playerTurn.innerText = currentPlayer + " player turn";
         });
 
