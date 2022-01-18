@@ -1,163 +1,202 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TicTacToe Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <h1 class="title">TicTacToe</h1>
-        <div id="result"></div>
-        <div class="container">      
-            <p class="instructions">
-                Game starts by clicking on a box.<br>
-                First Player starts as <span id="playerX"><b>Player X</b></span><br>
-                and<br>
-                Second Player as <span id="playerO"><b>Player O</b></span> 
-            </p>
-            <div class="board">
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-            </div>              
-            <button class="restart" id="restart"><b>Restart</b></button>
-        </div>
-        <p class="footer">         
-          <small>Brought to you by Tobias Mayer, Felix Walker, Fiona Blackler</small>
-        </p>
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-          var socket = io();
 
-          // const userIds = [];
-          // if (userIds <= 0) {
-          // var userId = prompt("Enter a name");
-          // } else {
-            
-          // }
-          // userIds.push("userId");
+<head>
+  <title>TicTacToe Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+    integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+    integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+</head>
 
-          var currentPlayer = 'X';
-          var button = document.getElementById('restart');
-          var resultBox = document.getElementById('result');
-          const cells = Array.from(document.querySelectorAll(".cell"));
+<body>
+  <h1 class="title">TicTacToe</h1>
+  <div id="result"></div>
+  <div id="player"></div>
+  <div id="turn"></div>
+  <div id="gameStatus">1/2 players</div>
+  <div class="container">
+    <p class="instructions">
+      Game starts by clicking on a box.<br>
+      First Player starts as <span id="playerX"><b>Player X</b></span><br>
+      and<br>
+      Second Player as <span id="playerO"><b>Player O</b></span>
+    </p>
+    <div class="board">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+    <button class="restart" id="restart"><b>Restart</b></button>
+  </div>
+  <p class="footer">
+    <small>Brought to you by Tobias Mayer, Felix Walker, Fiona Blackler</small>
+  </p>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
 
-          const PLAYERX_WON = 'PLAYERX_WON';
-          const PLAYERO_WON = 'PLAYERO_WON';
-          const TIE = 'TIE';
-          var isGameActive = true;
-          var board = ['', '', '', '', '', '', '', '', ''];
+    var currentPlayer = 'X';
+    var yourPlayer = null;
+    var isGameActive = true;
+    var gameReady = false;
 
-          const winningConditions = [
-              [0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8],
-              [0, 3, 6],
-              [1, 4, 7],
-              [2, 5, 8],
-              [0, 4, 8],
-              [2, 4, 6]
-          ];
-          
-          function handleResultValidation() {
-            let roundWon = false;
-            for (let i = 0; i <= 7; i++) {
-                const winCondition = winningConditions[i];
-                const a = board[winCondition[0]];
-                const b = board[winCondition[1]];
-                const c = board[winCondition[2]];
-                if (a === '' || b === '' || c === '') {
-                    continue;
-                }
-                if (a === b && b === c) {
-                    roundWon = true;
-                    break;
-                }
+    var button = document.getElementById('restart');
+    var resultBox = document.getElementById('result');
+    var playerBox = document.getElementById('player');
+    var playerTurn = document.getElementById('turn');
+    const cells = Array.from(document.querySelectorAll(".cell"));
+
+    const PLAYERX_WON = 'PLAYERX_WON';
+    const PLAYERO_WON = 'PLAYERO_WON';
+    const TIE = 'TIE';
+
+    var board = ['', '', '', '', '', '', '', '', ''];
+    const winningConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    function handleResultValidation() {
+      let roundWon = false;
+      for (let i = 0; i <= 7; i++) {
+        const winCondition = winningConditions[i];
+        const a = board[winCondition[0]];
+        const b = board[winCondition[1]];
+        const c = board[winCondition[2]];
+        if (a === '' || b === '' || c === '') {
+          continue;
+        }
+        if (a === b && b === c) {
+          roundWon = true;
+          break;
+        }
+      }
+
+      if (roundWon) {
+        socket.emit('player won', currentPlayer);
+      }
+      if (!board.includes('') && !roundWon) {
+        socket.emit('player tie', TIE);
+      }
+    }
+
+    socket.on('game ready', function (data) {
+      gameReady = data;
+      gameStatus.innerText = "Game is in progress";
+    });
+
+    function isGameReady() {
+      if (gameReady === false) {
+        window.setTimeout(isGameReady, 100); //ms
+        socket.emit('game ready');
+      } else {
+        socket.emit('set player', yourPlayer);
+
+        //Cell click EvenListener initiation
+        cells.forEach((cell, index) => {
+          cell.addEventListener('click', event => {
+            if (cell.textContent === "" && isGameActive && yourPlayer == currentPlayer) {
+              socket.emit('player move', index);
             }
+          });
+        });
 
-            if (roundWon) {
-              socket.emit('player won', currentPlayer);
-            }
-            if (!board.includes('')) {
-              socket.emit('player tie', TIE);
-            }
+        //Restart click EvenListener initiation
+        button.addEventListener('click', event => {
+          if (!isGameActive && (yourPlayer == "X" || yourPlayer == "O")) {
+            socket.emit('restart board',);
           }
+        });
 
-          //Achtet auf click die data senden
-          cells.forEach( (cell, index) => {
-              cell.addEventListener('click', event => {
-                if (cell.textContent === "" && isGameActive) {
-                  socket.emit('player move', index);
-                }
-              });
+        //
+        //SOCKET.ONs
+        //
+
+        //Sets if you X or O
+        socket.on('set player', function (data) {
+          yourPlayer = data;
+          playerBox.innerText = "You are: " + yourPlayer
+          playerTurn.innerText=currentPlayer+" player turn";
+        });
+
+        //Reaction on player win
+        socket.on('player won', function (data) {
+          isGameActive = false;
+          gameResult = data === 'X' ? PLAYERX_WON : PLAYERO_WON
+          resultBox.textContent = gameResult;
+          playerTurn.innerText="";
+          gameStatus.innerText="Game ended please restart";
+        });
+
+        //Reaction on tie
+        socket.on('player tie', function (data) {
+          isGameActive = false;
+          gameResult = data;
+          resultBox.textContent = gameResult;
+          playerTurn.innerText="";
+          gameStatus.innerText="Game ended please restart";
+        });
+
+        //Reaction on player move
+        socket.on('player move', function (data) {
+          //set player color
+          if (currentPlayer === "X") {
+            cells[data].setAttribute("id", "playerX");
+          } else {
+            cells[data].setAttribute("id", "playerO");
+          }
+          //add board state
+          board[data] = currentPlayer;
+          //set X or O in clicked cell
+          cells[data].textContent = currentPlayer;
+          handleResultValidation();
+          //switch players
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+          playerTurn.innerText=currentPlayer+" player turn";
+        });
+
+        //Restart game
+        socket.on('restart board', function (data) {
+          resultBox.textContent = "";
+          //set game activ
+          isGameActive = true;
+          //reset player turn
+          currentPlayer = 'X';
+          //reset moves
+          cells.forEach((cell, index) => {
+            board[index] = "";
+            cell.textContent = "";
           });
+          gameStatus.innerText="Game is in progress";
+        });
+      }
+    }
 
-          //Reset button click
-          button.addEventListener('click', event => {
-            if (!isGameActive) {
-             socket.emit('reset board',);
-            }
-          });
-          
-          //
-          //SOCKET.ONs
-          //
+    isGameReady();
 
-          //Reaktion wenn spieler gewinnt
-          socket.on('player won', function(data) {
-            isGameActive = false;
-            gameResult = data === 'X' ? PLAYERX_WON : PLAYERO_WON
-            resultBox.textContent = gameResult;
-          });
+  </script>
+  </script>
+</body>
 
-          //Reaktion wenn spiele unentschieden
-          socket.on('player tie', function(data) {
-            isGameActive = false;
-            gameResult = data;
-            resultBox.textContent = gameResult;
-          });
-
-          //Reaktionen auf empfangene data
-          socket.on('player move', function(data) {
-            //set Player Color
-            if (currentPlayer==="X") {
-            cells[data].setAttribute("id","playerX");
-            } else {
-            cells[data].setAttribute("id","playerO");
-            }
-            //add board state
-            board[data] = currentPlayer;
-            //set X or O in clicked cell
-            cells[data].textContent = currentPlayer;
-            handleResultValidation();
-            //switch players
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-          });
-
-          //Reset board moves
-          socket.on('reset board', function(data) {
-            resultBox.textContent = "";
-            //set game activ
-            isGameActive=true;
-            //reset player turn
-            currentPlayer = 'X';
-            //reset moves
-            cells.forEach( (cell, index) => {
-              board[index] = "";
-              cell.textContent = "";
-            });
-          });
-
-        </script>
-    </script>
-  </body>
 </html>
