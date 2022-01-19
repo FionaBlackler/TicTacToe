@@ -29,6 +29,7 @@ body{
     background-image: url("rough_black_metal_wall.jpg") !important;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: black !important;
     background-size: cover;
 }
 
