@@ -44,9 +44,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('');
     console.log('user disconnected');
-    console.log('Client ID 1: ' + clientOne);
-    console.log('Client ID 2: ' + clientTwo);
-
+    
     //Ids updated
     if (!(socket.id == clientOne || socket.id == clientTwo)) {
       return;
@@ -57,6 +55,8 @@ io.on('connection', (socket) => {
       clientOne = null;
       playerCount -= 1;
     }
+    console.log('Client ID 1: ' + clientOne);
+    console.log('Client ID 2: ' + clientTwo);
 
     io.emit('restart board');
   });
